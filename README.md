@@ -1,70 +1,87 @@
-# Getting Started with Create React App
+Me-API Playground 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full-stack project that stores and exposes my personal candidate profile via a small API and a minimal frontend.
 
-## Available Scripts
+Backend: Express + Node.js + MongoDB Atlas
 
-In the project directory, you can run:
+Frontend: React (Vercel-hosted)
 
-### `npm start`
+Database: MongoDB Atlas (with real data)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Hosting: Backend on Render, Frontend on Vercel
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+🔗 Live URLs
 
-### `npm test`
+Frontend (React): (https://me-api-frontend-75ou7v5pv-riticulous-projects.vercel.app/)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Backend (API): (https://me-api-backend.onrender.com/)
 
-### `npm run build`
+Resume: https://drive.google.com/file/d/1en578isZ2NsE-YBEHntI4K1hgqQLwQJW/view?usp=sharing
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Features
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+CRUD operations for candidate profile (/profile)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Query projects by skill (/profile/projects?skill=...)
 
-### `npm run eject`
+Get top skills (/profile/skills/top)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Search across profile (/profile/search?q=...)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Health check (/profile/health)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Minimal React UI for profile, projects, search
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+search
 
-## Learn More
+📡 API Endpoints
+Health Check
+curl https://me-api-backend.onrender.com/profile/health
+# → { "status": "OK" }
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Get Profile
+curl https://me-api-backend.onrender.com/profile
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Update Profile
+curl -X POST https://me-api-backend.onrender.com/profile \
+   -H "Content-Type: application/json" \
+   -d '{
+     "name": "Ritik Laxwani",
+     "email": "ritiklaxwani2004@gmail.com",
+     "skills": ["JavaScript", "Node.js", "React"]
+   }'
 
-### Code Splitting
+Get Projects by Skill
+curl "https://me-api-backend.onrender.com/profile/projects?skill=React"
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Get Top Skills
+curl https://me-api-backend.onrender.com/profile/skills/top
 
-### Analyzing the Bundle Size
+Search
+curl "https://me-api-backend.onrender.com/profile/search?q=MongoDB"
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Architecture
+me-api-playground/
+│
+├── backend/                  # Node.js + Express + MongoDB API
+│   ├── server.js              # Entry point
+│   ├── routes/                # Express route handlers
+│   │   └── ProfileRoutes.js
+│   ├── models/                # Mongoose schemas
+│   │   └── Profile.js
+│   ├── package.json
+│   └── .env                   # (local only, excluded from git)
+│
+├── frontend/                 # React app (Vite or CRA)
+│   ├── src/                   # React components
+│   │   └── App.js
+│   ├── public/
+│   ├── package.json
+│   └── .env                   # REACT_APP_API_URL (points to backend)
+│
+├── README.md                  # Project overview & setup
+└── schema.md                  # Documentation of Profile schema
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+✨ Built with ❤️ by Ritik Laxwani
